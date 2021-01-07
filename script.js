@@ -62,7 +62,14 @@ function btnRemove() {
   document.querySelectorAll('.cart__item').forEach(item => item.remove());
 }
 
+const loading = () => document.querySelector('.items')
+  .appendChild(createCustomElement('span', 'loading', 'loading...'));
+
 window.onload = function onload() {
+  loading();
+  setTimeout(() => {
+    document.querySelector('.loading').remove();
+  }, 1000);
   fetch('https://api.mercadolibre.com/sites/MLB/search?q=computador')
     .then(response => response.json())
     .then(data => data.results.forEach((produto) => {
